@@ -50,7 +50,7 @@ CONFIG_ZMK_POINTING=y
 ```
 
 
-## DTS ( for `YOUR-SHIELD.overlay`)
+### DTS ( for `YOUR-SHIELD.overlay`)
 
 ```dts
 // --------------------------------------------
