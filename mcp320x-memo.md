@@ -1,4 +1,4 @@
-# for MCP320x
+# Patch for MCP320x
 
 This patch is to use [Microchip MCP3204/MCP3208 ADC (PDF)](https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/21298e.pdf) with analog-input-driver.
 
