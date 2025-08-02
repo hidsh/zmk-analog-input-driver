@@ -112,3 +112,5 @@ CONFIG_ZMK_POINTING=y
         input-processors = <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>;  // acts as mouse
     };
 ```
+
+Note: Your configs/dts can be used to both MCP3204 and MCP3208 without any modifications, because the difference is just a wiring.
