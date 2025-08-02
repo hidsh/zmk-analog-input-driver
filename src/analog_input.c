@@ -67,7 +67,16 @@ static int analog_input_report_data(const struct device *dev) {
 
         int32_t raw = data->as_buff[i];
         int32_t mv = raw;
+
+#if IS_ENABLED(CONFIG_ADC_MCP320X)
+
+#define adc_ref_internal(x) ((int32_t)config->adc_mcp320x_vref_mv)
+
         adc_raw_to_millivolts(adc_ref_internal(adc), ADC_GAIN_1_6, as->resolution, &mv);
+#undef  adc_ref_internal
+
+#endif // IS_ENABLED(CONFIG_ADC_MCP320X)
+
 #if IS_ENABLED(CONFIG_ANALOG_INPUT_LOG_DBG_RAW)
         LOG_DBG("AIN%u raw: %d mv: %d", ch_cfg.adc_channel.channel_id, raw, mv);
 #endif
@@ -425,6 +434,22 @@ static const struct sensor_driver_api analog_input_driver_api = {
     .channel_get = analog_input_channel_get,
 };
 
+#if IS_ENABLED(CONFIG_ADC_MCP320X)
+
+#undef  ADC_DT_SPEC_STRUCT          /* zmk/zephyr/include/zephyr/drivers/adc.h */
+#define ADC_DT_SPEC_STRUCT(ctlr, channel) { \
+		.dev = DEVICE_DT_GET(ctlr), \
+		.channel_id = channel, \
+		ADC_CHANNEL_CFG_FROM_DT_NODE(\
+			ADC_CHANNEL_DT_NODE(ctlr, channel)) \
+	}
+
+#undef  DT_IO_CHANNELS_INPUT_BY_IDX /* zmk/zephyr/include/zephyr/devicetree/io-channels.h */
+#define DT_IO_CHANNELS_INPUT_BY_IDX(node_id, idx) \
+	DT_PHA_BY_IDX(node_id, io_channels, idx, channel)
+
+#endif // IS_ENABLED(CONFIG_ADC_MCP320X)
+
 #define TRANSFORMED_IO_CHANNEL_ENTRY(node_id)                                                      \
     {                                                                                              \
         .adc_channel = ADC_DT_SPEC_GET_BY_IDX(node_id, 0),                                         \
@@ -446,6 +471,7 @@ static const struct sensor_driver_api analog_input_driver_api = {
     };                                                                                             \
     static const struct analog_input_config config##n = {                                          \
         .sampling_hz = DT_PROP(DT_DRV_INST(n), sampling_hz),                                       \
+        .adc_mcp320x_vref_mv = DT_PROP(DT_DRV_INST(n), adc_mcp320x_vref_mv),                       \
         .io_channels_len = (DT_FOREACH_CHILD(DT_DRV_INST(n), ANIN_IOC_CHILD_LEN_PLUS_ONE) 0),      \
         .io_channels = { DT_INST_FOREACH_CHILD_SEP(n, TRANSFORMED_IO_CHANNEL_ENTRY, (, )) },       \
     };                                                                                             \

@@ -9,6 +9,14 @@ properties:
   sampling-hz:
     type: int
     default: 100
+  
+  adc-mcp320x-vref-mv:
+    type: int
+    default: 0
+    description: |
+      Reference voltage in millivolts for the MCP3204/MCP3208 controller.
+      Must be >= 0 and <= 0x7FFFFFFF.
+      (Adopted from zmk/zephyr/dts/bindings/adc/adc-controller.yaml)
 
 child-binding:
   description: Per-channel configuration settings

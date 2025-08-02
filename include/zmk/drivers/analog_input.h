@@ -62,6 +62,8 @@ struct analog_input_io_channel {
 struct analog_input_config {
     uint32_t sampling_hz;
     uint8_t io_channels_len;
+    uint32_t adc_mcp320x_vref_mv;
+
 	struct analog_input_io_channel io_channels[];
 };
 
