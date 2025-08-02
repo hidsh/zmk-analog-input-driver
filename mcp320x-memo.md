@@ -1,14 +1,14 @@
 # for MCP320x
 
-This patch is to use [(PDF) Microchip MCP3204/MCP3208 ADC](https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/21298e.pdf) with analog-input-driver.
+This patch is to use [Microchip MCP3204/MCP3208 ADC (PDF)](https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/21298e.pdf) with analog-input-driver.
 
-This patch is "alpha" for now. so works at least but quite dirty.
+Note: This patch is "alpha" for now. So it works at least but quite dirty.
 
 ## Limitations
 
-MCP320x's ports can *not* be mixed with internal-ADC's channels.
+MCP320x's ports can *not* be mixed with internal-ADC's channels. Thus you can *not* use both of MCP320x and internal-ADC at the same time for the analog-input-driver.
 
-And *not* tested (thus unlikely working) configs/properties below:
+And *not* tested (unlikely working) configs/properties below:
 
 - `CONFIG_ADC_ASYNC`
 - `report-on-change-only`
