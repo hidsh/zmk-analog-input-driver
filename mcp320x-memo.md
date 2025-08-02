@@ -22,7 +22,6 @@ Some example snippets may help you below.
 # ---------------------------------------------
 # mcp3204
 # ---------------------------------------------
-# CONFIG_ADC=y
 CONFIG_ADC_MCP320X=y
 CONFIG_ADC_INIT_PRIORITY=80
 
@@ -32,16 +31,16 @@ CONFIG_ADC_INIT_PRIORITY=80
 # Enable Analog Input
 CONFIG_ADC=y
 # Use async mode (Optional)
-#CONFIG_ADC_ASYNC=y
+# CONFIG_ADC_ASYNC=y
 
 # Enable Analog Input Module
 CONFIG_ANALOG_INPUT=y
-CONFIG_ANALOG_INPUT_LOG_LEVEL_DBG=y
+# CONFIG_ANALOG_INPUT_LOG_LEVEL_DBG=y
 # CONFIG_ANALOG_INPT_REPORT_INTERVAL_MIN=22
 
 # Enable logging for pre/post processed value
-CONFIG_ANALOG_INPUT_LOG_DBG_RAW=y
-CONFIG_ANALOG_INPUT_LOG_DBG_REPORT=y
+# CONFIG_ANALOG_INPUT_LOG_DBG_RAW=y
+# CONFIG_ANALOG_INPUT_LOG_DBG_REPORT=y
 
 # Just in case, you don't RTFM
 CONFIG_INPUT=y
