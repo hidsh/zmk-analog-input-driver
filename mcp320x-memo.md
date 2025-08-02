@@ -13,7 +13,7 @@ And *not* tested (unlikely working) configs/properties below:
 - `CONFIG_ADC_ASYNC`
 - `report-on-change-only`
 
-## Example Setteings
+## Example Settings
 
 Some example snippets may help you below.
 
